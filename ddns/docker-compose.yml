@@ -1,0 +1,9 @@
+version: "3"
+services:
+  ddns:
+    container_name: ddns
+    build: .
+    restart: always
+    env_file:
+      - .env
+
