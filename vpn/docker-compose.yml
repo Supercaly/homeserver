@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  vpn:
+    container_name: vpn-server
+    image: hwdsl2/ipsec-vpn-server
+    restart: always
+    hostname: vpn-server
+    env_file:
+      - ./.env
+    ports:
+      - "500:500/udp"
+      - "4500:4500/udp"
+    privileged: true
+    volumes:
+      - "${HOME}/containers/vpn/data:/etc/ipsec.d"
+      - "/lib/modules:/lib/modules:ro"
+
