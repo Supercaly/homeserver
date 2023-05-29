@@ -1,0 +1,22 @@
+{$DOMAIN}:443 {
+  log {
+    level INFO
+    output file "/logs/access.log" {
+      roll_size 10MB
+      roll_keep 10
+    }
+  }
+
+  tls {$EMAIL}
+  encode gzip
+
+  route {
+    reverse_proxy /pwd/notifications/hub vaultwarden:3012
+    reverse_proxy /pwd/* vaultwarden:80 {
+      header_up X-Real-IP {remote_host}
+    }
+    handle /* {
+      abort
+    }
+  }
+}
