@@ -104,12 +104,12 @@ TMP_DIR="/tmp/backup"
 
 # check data dir
 if [[ ! -d "${DATA_DIR}" ]]; then
-    echo "cannot find folder '${DATA_DIR}'"
+    loge "cannot find folder '${DATA_DIR}'"
     exit 1
 fi
 # check backup dir
 if [[ ! -d "${BACKUP_DIR}" ]]; then
-    echo "cannot find folder '${BACKUP_DIR}'"
+    loge "cannot find folder '${BACKUP_DIR}'"
     exit 1
 fi
 
