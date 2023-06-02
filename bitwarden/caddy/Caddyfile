@@ -1,7 +1,7 @@
 {$DOMAIN}:443 {
   log {
     level INFO
-    output file "/logs/access.log" {
+    output file "/log/access.log" {
       roll_size 10MB
       roll_keep 10
     }
