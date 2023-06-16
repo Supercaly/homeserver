@@ -1,9 +1,11 @@
 version: "3"
 services:
-  ddns:
-    container_name: ddns
-    build: .
+  ddns-updater:
+    image: qmcgaw/ddns-updater
+    container_name: ddns-updater
+    network_mode: bridge
+    ports:
+      - 8000:8000/tcp
+    volumes:
+      - ./data:/updater/data
     restart: always
-    env_file:
-      - .env
-
