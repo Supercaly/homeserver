@@ -1,2 +1,0 @@
-*/10 * * * * python /usr/src/ddns/check.py
-

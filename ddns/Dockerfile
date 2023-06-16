@@ -1,13 +1,20 @@
 FROM python:3-alpine
 
-WORKDIR /usr/src/ddns
+WORKDIR /src
 
+# install dependencies
+RUN apk add --no-cache \
+    bash
+
+# install python dependencies
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY check.py ./
+# copy python scripts
+COPY update.py ./
 
-COPY crontab /etc/crontabs/root
+# copy bash scripts
+COPY entrypoint.sh ./
+RUN chmod +x ./*.sh
 
-CMD ["crond", "-f", "-l", "2"]
-
+ENTRYPOINT ["/src/entrypoint.sh"]
