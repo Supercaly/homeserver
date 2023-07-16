@@ -9,3 +9,5 @@ services:
     volumes:
       - ./data:/updater/data
     restart: always
+    env_file:
+      - .env
