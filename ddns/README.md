@@ -10,8 +10,8 @@ The image will check every **5 minutes** if the DNS record resolves to the curre
 ## Important files
 
 - `docker-compose.yml`
-- `.env` contains important environment variables.
-- `data/config.json` containg Dynu domain configuration.
+- `.env` ([list of available envs](https://github.com/qdm12/ddns-updater#configuration)).
+- `data/config.json` containg Dynu domain configuration ([how to config](https://github.com/qdm12/ddns-updater#environment-variables)).
 
 ## Web UI
 
