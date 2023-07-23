@@ -1,3 +1,12 @@
+# If accessed outside the local network redirect bitwarden admin page to the main vault
+(admin_redirect) {
+  @admin {
+    path /pwd/admin*
+    not remote_ip private_ranges
+  }
+  redir @admin /pwd/
+}
+
 {
   log {
     level INFO
@@ -11,6 +20,8 @@
 {$DOMAIN_NAME}:443 {
   tls {$EMAIL}
   encode gzip
+
+  import admin_redirect
 
   route {
     reverse_proxy /pwd/notifications/hub vaultwarden:3012
