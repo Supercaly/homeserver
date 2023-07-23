@@ -1,4 +1,4 @@
-{$DOMAIN}:443 {
+{
   log {
     level INFO
     output file "/log/access.log" {
@@ -6,7 +6,9 @@
       roll_keep 10
     }
   }
+}
 
+{$DOMAIN_NAME}:443 {
   tls {$EMAIL}
   encode gzip
 

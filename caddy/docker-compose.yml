@@ -1,0 +1,26 @@
+version: "3"
+services:
+  caddy:
+    container_name: caddy
+    image: caddy:2
+    restart: always
+    networks:
+      - caddy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+      - /var/log/caddy:/log
+    env_file:
+      - .env
+      
+networks:
+  caddy:
+    external: true
+    
+volumes:
+  caddy_data:
+  caddy_config:

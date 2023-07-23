@@ -1,28 +1,17 @@
 version: "3"
 services:
-  caddy:
-    container_name: caddy
-    image: caddy:2
-    restart: always
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
-      - /var/log/caddy:/log
-    env_file:
-      - ./caddy/.env
   vaultwarden:
     container_name: vaultwarden
     image: vaultwarden/server:latest
     restart: always
+    networks:
+      - caddy
     volumes:
       - vw_data:/data
       - /var/log/vaultwarden:/log
     env_file:
       - ./vaultwarden/.env
+
   vwbackup:
     container_name: vwbackup
     build: ./vwbackup
@@ -33,8 +22,10 @@ services:
     env_file:
       - ./vwbackup/.env
 
+networks:
+  caddy:
+    external: true
+
 volumes:
   vw_data:
   vw_backup:
-  caddy_data:
-  caddy_config:
