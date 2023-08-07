@@ -21,24 +21,13 @@ This image creates the following docker volumes:
 
 ## Docker Networks
 
-This image needs some [docker networks](https://docs.docker.com/network/) to properly work:
+This image uses some docker networks:
 
-- `caddy`
-
-Those networks need to be created manually before using this image. 
-To create them use this command for each network as seen [here](https://docs.docker.com/engine/reference/commandline/network_create/#description)
-
-```console
-$ docker network create -d bridge name
-```
-
-More info on compose networks can be found [here](https://docs.docker.com/compose/networking/#specify-custom-networks).
-
+- `caddy` (external)
 
 ## .env
 
-To properly work, this image needs some configurations stored inside a `.env` file
+To properly work, this image has some secret environment variables stored inside a `.env` file:
 
-- `TZ` the local timezone
 - `EMAIL` email to use to configure TLS certificates
 - `DOMAIN_NAME` name of the domain to use

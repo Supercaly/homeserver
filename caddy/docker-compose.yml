@@ -11,16 +11,18 @@ services:
       - 443:443
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
+      - data:/data
+      - config:/config
       - /var/log/caddy:/log
     env_file:
       - .env
+    environment:
+      TZ: "Europe/Rome"
       
 networks:
   caddy:
     external: true
     
 volumes:
-  caddy_data:
-  caddy_config:
+  data:
+  config:
