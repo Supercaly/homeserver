@@ -4,28 +4,25 @@ services:
     container_name: vaultwarden
     image: vaultwarden/server:latest
     restart: always
+    env_file:
+      - .env
+    environment:
+      WEBSOCKET_ENABLED: "true"
+      SIGNUPS_ALLOWED: "false"
+      INVITATIONS_ALLOWED: "false"
+      LOG_FILE: "/log/vaultwarden.log"
+      LOG_LEVEL: "warn"
+      TZ: "Europe/Rome"
     networks:
       - caddy
     volumes:
-      - vw_data:/data
+      - vaultwarden_data:/data
       - /var/log/vaultwarden:/log
-    env_file:
-      - ./vaultwarden/.env
-
-  vwbackup:
-    container_name: vwbackup
-    build: ./vwbackup
-    restart: always
-    volumes:
-      - vw_data:/vw_data:ro
-      - vw_backup:/vw_backup
-    env_file:
-      - ./vwbackup/.env
 
 networks:
   caddy:
     external: true
 
 volumes:
-  vw_data:
-  vw_backup:
+  vaultwarden_data:
+    external: true

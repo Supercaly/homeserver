@@ -1,0 +1,28 @@
+version: "3"
+services:
+  backup:
+    build: .
+    container_name: restic-backup
+    hostname: resticdocker
+    restart: always
+    env_file:
+      - .env
+    environment:
+      RUN_ON_STARTUP: "true"
+      RESTIC_BACKUP_ARGS: >-
+        --verbose
+      RESTIC_FORGET_ARGS: >-
+        --prune
+        --keep-last 10
+      PRE_COMMANDS: /hooks/pre_cmd_hook.sh
+      BACKUP_CRON: "0 2 * * *"
+      TZ: "Europe/Rome"
+    volumes:
+      - ./rclone:/root/.config/rclone
+      - data:/data
+      - vaultwarden_data:/mnt/vw_data:ro
+
+volumes:
+  data:
+  vaultwarden_data:
+    external: true
