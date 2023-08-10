@@ -13,10 +13,15 @@ services:
         --verbose
       RESTIC_FORGET_ARGS: >-
         --prune
-        --keep-last 10
+        --keep-last 15
       PRE_COMMANDS: /hooks/pre_cmd_hook.sh
+      POST_COMMANDS_FAILURE: /hooks/post_cmd_failure.sh
+      POST_COMMANDS_INCOMPLETE: /hooks/post_cmd_incomplete.sh     
       BACKUP_CRON: "0 2 * * *"
       TZ: "Europe/Rome"
+      NOTIFICATION_ADDRESS: "notify:5000"
+    networks:
+      - notification
     volumes:
       - ./rclone:/root/.config/rclone
       - data:/data
@@ -25,4 +30,8 @@ services:
 volumes:
   data:
   vaultwarden_data:
+    external: true
+
+networks:
+  notification:
     external: true

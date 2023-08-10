@@ -1,0 +1,12 @@
+version: "3"
+services:
+  notify:
+    build: .
+    container_name: notify
+    restart: always
+    networks:
+      - notification
+
+networks:
+  notification:
+    external: true

@@ -23,6 +23,12 @@ This service uses the following docker volumes:
 - `restic_data` used to store the backup before uploading it
 - `vaultwarden_data` (external) vaultwarden data
 
+## Docker networks
+
+This image uses the following networks:
+
+- `notification` (external)
+
 ## .env
 
 This service has some important environment variable already configured inside the `docker-compose.yml` file, but some secret are stored inside a `.env` file:
