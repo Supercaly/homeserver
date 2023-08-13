@@ -1,17 +1,24 @@
-version: '3'
+version: "3"
 services:
-  vpn:
-    container_name: vpn-server
-    image: hwdsl2/ipsec-vpn-server
-    restart: always
-    hostname: vpn-server
+  wireguard:
+    image: lscr.io/linuxserver/wireguard
+    container_name: vpn
+    cap_add:
+      - NET_ADMIN
+      # - SYS_MODULE
     env_file:
-      - ./.env
-    ports:
-      - "500:500/udp"
-      - "4500:4500/udp"
-    privileged: true
+      - .env
+    environment:
+      TZ: "Europe/Rome"
+      PEERDNS: "auto"
+      # PERSISTENTKEEPALIVE_PEERS: "all"
+      ALLOWEDIPS: "0.0.0.0/0"
     volumes:
-      - "${HOME}/containers/vpn/data:/etc/ipsec.d"
-      - "/lib/modules:/lib/modules:ro"
+      - config:/config
+      - /lib/modules:/lib/modules
+    ports:
+      - 51820:51820/udp
+    restart: unless-stopped
 
+volumes:
+  config:
