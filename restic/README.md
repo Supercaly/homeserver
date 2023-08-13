@@ -1,44 +1,44 @@
 # Restic
 
-This service is responsible for automatically backup to a remote location some important data.
+This stack provides [Restic](https://restic.net/), a backup tool that can automatically backup important data to a remote location.
 
 ## How it works
 
-The service contains a container named `backup` that **every day** at **2:00AM** performs the backup of some specifyed data to a remote **google drive** folder.
+The Restic service performs a backup of some specifyed data **every day** at **2:00AM** and copy it to a remote **google drive** folder.
 
-The backup is performed by `restic` which creates incrementa backups with snapshots.
+Restic is performing incremental backups with snapshots in order to consume as less memory as possible.
 
-The backuped data is protected by a password and encrypted, moreover the data is not in plain text, but uses the `restic` folder/fiele structure.
+The backd up data is encrypted and password protected, moreover the data is not in plain text, but uses the restic folder/file structure.
 
 ## What data is backed up?
 
-The data backed up is:
+Restic backs up this data:
 
 - bitwarden's `data` directory
 
 ## Docker Volumes
 
-This service uses the following docker volumes:
+This stack uses this docker volumes:
 
-- `restic_data` used to store the backup before uploading it
+- `data` store the backup before uploading it
 - `vaultwarden_data` (external) vaultwarden data
 
-## Docker networks
+## Docker Networks
 
-This image uses the following networks:
+This stack uses this docker networks:
 
 - `notification` (external)
 
 ## .env
 
-This service has some important environment variable already configured inside the `docker-compose.yml` file, but some secret are stored inside a `.env` file:
+This stack uses some secret environment variables stored inside a `.env` file:
 
 - `RESTIC_REPOSITORY` name of the remote repository to use
 - `RESTIC_PASSWORD` password of the repository
 
 ## rclone
 
-To store the data inside a personal Google Drive folder we use `rclone`. 
+To store the data inside a personal **Google Drive** folder we use [RClone](https://rclone.org/). 
 Rclone must be configured following [this steps](https://rclone.org/drive/) on a desktop machine to obtain a `rclone.conf` file that is then placed inside the `rclone` folder.
 
 ## Restore the backed up files

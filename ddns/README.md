@@ -1,18 +1,13 @@
 # DDNS-Updater
 
-This service is responsible for automatically updating Dynamic DNS (DDNS).
-To do this, it use the properly configured [qmcgaw/ddns-updater](https://github.com/qdm12/ddns-updater) Docker image.
+This stack updates automatically the Dynamic DNS (DDNS) using [ddns-updater](https://github.com/qdm12/ddns-updater).
 
 ## How it works
 
-The image will check every **5 minutes** if the DNS record resolves to the current IP address and update the record accordingly.
+The software checks every **5 minutes** if the DNS record for the configured domain names resolves to the current IP address and update the record accordingly.
 
-## Important files
+## Ports
 
-- `docker-compose.yml`
-- `.env` ([list of available envs](https://github.com/qdm12/ddns-updater#configuration)).
-- `data/config.json` containg Dynu domain configuration ([how to config](https://github.com/qdm12/ddns-updater#environment-variables)).
+This stack exposes tis ports to the outside:
 
-## Web UI
-
-The image offers a Web UI to view the current status; the site is accessible at port **8000**.
+- `8000/TCP` used for WebUI

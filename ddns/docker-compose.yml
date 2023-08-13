@@ -8,6 +8,6 @@ services:
       - 8000:8000/tcp
     volumes:
       - ./data:/updater/data
+    environment:
+      TZ: "Europe/Rome"
     restart: always
-    env_file:
-      - .env

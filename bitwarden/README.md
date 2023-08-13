@@ -1,22 +1,22 @@
 # Bitwarden self-host
 
-This service is responsibe of managing the self-hosted instance of [Bitwarden](https://bitwarden.com/) through the unofficial implementation called [vaultwarden](https://github.com/dani-garcia/vaultwarden).
+This stack manages a self-hosted instance of [Bitwarden](https://bitwarden.com/) using [vaultwarden](https://github.com/dani-garcia/vaultwarden), the unofficial server implementation.
 
 ## .env
 
-This service has some important environment variable already configured inside the `docker-compose.yml` file, but some secret are stored inside a `.env` file:
+This stack uses some secret environment variables stored inside a `.env` file:
  
 - `DOMAIN` full domain name for vaultwarden end-point
 - `ADMIN_TOKEN` token used for accessing the admin panel
 
 ## Docker Volumes
 
-This service creates the following docker volumes:
+This stack uses the following docker volumes:
 
-- `vaultwarden_data` (external) used to store vaultwarden data
+- `vaultwarden_data` (external) store vaultwarden data
 
 ## Docker Networks
 
-The vaultwarden image uses this docker networks:
+This stack uses this docker networks:
 
 - `caddy` (external)

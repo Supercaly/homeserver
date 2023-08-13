@@ -1,15 +1,15 @@
 # Notify
 
-This service listens to HTTP POST requests with a message that needs to be sent to various notification systems, like:
+This stack listens for critical and error messages from other containers and sends immediate notifications via 
 
-- SMTP
+- SMTP (Gmail)
 - Telegram
 
-To do so this image uses Apprise.
+The stack sends notifications using [Apprise](https://github.com/caronc/apprise).
 
 ## Format of the request
 
-To send a notification a service needs to perform a `POST` request to the `/` route of the server passing the following `json` data:
+To send a notification a service located in a different container needs to perform a `POST` request to the `/` route of the server passing the following `json` data:
 
 ```json
 {
@@ -18,7 +18,7 @@ To send a notification a service needs to perform a `POST` request to the `/` ro
 }
 ```
 
-A popular way of sending this message is through `curl` like so:
+A popular way of sending this message is using `curl`:
 
 ```bash
 $ curl -X POST \
@@ -30,10 +30,10 @@ $ curl -X POST \
 ## .apprise
 
 To configure the apprise endpoints we use a configuration file named `.apprise`. 
-To properly configure this file read [this](https://github.com/caronc/apprise/wiki/config).
+Read the official [documentation](https://github.com/caronc/apprise/wiki/config) to properly configure it.
 
 ## Docker Networks
 
-This image uses some docker networks:
+This stack uses this docker networks:
 
 - `notification` (external)

@@ -1,24 +1,24 @@
 # VPN
 
-This service is responsible of providing a VPN server using [Wireguard](https://www.wireguard.com/).
+This stack provides a VPN server using [Wireguard](https://www.wireguard.com/).
 
 ## .env
 
-This service has some important environment variables configured inside the `docker-compose.yml` file, but some secret are sotred inside a `.env` file:
+This stack uses some secret environment variables sotred inside a `.env` file:
 
 - `PUID`/ `PGID` UID and GID for the docker user
 - `SERVERURL` domain name used to connect to the VPN
 - `SERVERPORT` port number used to connect to the VPN
 - `PEERS` list of peer names
 
-# Docker volumes
+# Docker Volumes
 
-This service uses the following docker volumes:
+This stack uses this docker volumes:
 
-- `config` used to store WG configurations
+- `config` store WG configurations
 
-# PORT
+# Ports
 
-This service exposes the followint ports:
+This stack exposes this ports to the outside:
 
-- `51820/UDP` used for the VPN connection
+- `51820/UDP` used for WG connection

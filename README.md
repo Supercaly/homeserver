@@ -1,11 +1,14 @@
 # HomeServer
 
-This repository contains all the files to manage the Docker installation of my personal Raspberry PI based home server.
+This repository contains a series of configurations for my personal Raspberry PI based home server using Docker.
 
-Every important service is placed inside his own container and every container has his folder. The project is structured this way:
+Every important service is placed inside his own container and every container has his folder. 
+The project is structured this way:
 
-- `ddns` -> Manage the Dynamic DNS
-- `caddy` -> Reverse proxy
 - `bitwarden` -> Bitwarden password manager
+- `caddy` -> Reverse proxy and HTTPS server
+- `ddns` -> Dynamic DNS manager
+- `notify` -> Server used to send notifications from other containers
 - `portainer` -> Portainer container manager
-- `vpn` -> IPSec VPN
+- `restic` -> Automatic incremental backup
+- `vpn` -> Wireguard VPN
