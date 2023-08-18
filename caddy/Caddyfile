@@ -1,29 +1,43 @@
-{
-  log {
-    level INFO
-    output file "/log/access.log" {
-      roll_size 10MB
-      roll_keep 10
+# Caddyfile used to configure the caddy HTTPS server and reverse proxy.
+
+# Block access to bitwarden admin from outside the local LAN.
+(block_bitwarden_admin_from_wan) {
+  @bw_admin_matcher {
+    path /pwd/admin*
+    not remote_ip private_ranges
+  }
+  handle @bw_admin_matcher {
+    respond "Access denied form outside LAN!" 403 {
+      close
     }
   }
 }
 
+# Block configuring all the sites accessible through the FQDN DOMAIN_NAME
+# on port HTTPS.
 {$DOMAIN_NAME}:443, www.{$DOMAIN_NAME}:443 {
+  log {
+    level INFO
+    output file "/log/calisti-ddnsfree-com-access.log" {
+      roll_size 10MB
+      roll_keep 10
+    }
+  }
+
   tls {$EMAIL}
   encode gzip
 
-  # If accessed outside the local network redirect bitwarden admin page to the main vault
-  @vw_admin {
-    path /pwd/admin*
-    not remote_ip private_ranges
-  }
-  redir @vw_admin /
-
   route {
+    # Bitwarden routes
+    import block_bitwarden_admin_from_wan
     reverse_proxy /pwd/notifications/hub vaultwarden:3012
     reverse_proxy /pwd/* vaultwarden:80 {
       header_up X-Real-IP {remote_host}
     }
+
+    # TODO: Add other routes like portainer and ddns-updater
+
+    # Block all other routes
     handle /* {
       respond "Access denied" 403 {
         close

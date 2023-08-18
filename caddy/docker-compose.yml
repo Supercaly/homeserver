@@ -1,8 +1,8 @@
 version: "3"
 services:
   caddy:
+    image: caddy:latest
     container_name: caddy
-    image: caddy:2
     restart: always
     networks:
       - caddy
@@ -11,18 +11,18 @@ services:
       - 443:443
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - /var/log/caddy:/log
       - data:/data
       - config:/config
-      - /var/log/caddy:/log
     env_file:
       - .env
     environment:
       TZ: "Europe/Rome"
-      
+
 networks:
   caddy:
     external: true
-    
+
 volumes:
   data:
   config:
