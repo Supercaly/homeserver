@@ -1,0 +1,50 @@
+version: "3"
+services:
+  agent:
+    image: crowdsecurity/crowdsec:latest
+    container_name: cs_agent
+    restart: always
+    environment:
+      COLLECTIONS: "crowdsecurity/whitelist-good-actors crowdsecurity/iptables crowdsecurity/caddy Dominic-Wagner/vaultwarden"
+      CUSTOM_HOSTNAME: "homeserver"
+      UID: "1000"
+      GID: "1000"
+      TZ: "Europe/Rome"
+    ports:
+      - 8080:8080
+    volumes:
+      - agent_data:/var/lib/crowdsec/data/
+      - agent_config:/etc/crowdsec/
+      - ./agent/acquis.d:/etc/crowdsec/acquis.d
+      - ./agent/profiles.yaml.local:/etc/crowdsec/profiles.yaml.local
+      - ./agent/notifications/notify.yaml:/etc/crowdsec/notifications/notify.yaml
+      - /var/log:/var/log/:ro
+    networks:
+      - notification
+
+  firewall-bouncer:
+    build: 
+      context: ./firewall_bouncer
+    container_name: cs_firewall_bouncer
+    restart: always
+    depends_on: 
+      - agent
+    environment:
+      API_URL: "http://localhost:8080/"
+      TZ: "Europe/Rome"
+    env_file:
+      - ./firewall_bouncer/.env
+    volumes:
+      - /var/log/cs_firewall_bouncer:/var/log/cs_firewall_bouncer
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    network_mode: "host"
+
+networks:
+  notification:
+    external: true
+
+volumes:
+  agent_config:
+  agent_data:

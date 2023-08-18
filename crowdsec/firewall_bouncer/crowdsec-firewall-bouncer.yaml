@@ -1,0 +1,24 @@
+mode: iptables
+pid_dir: /var/run/
+update_frequency: 30s
+daemonize: false
+log_mode: file
+log_dir: /var/log/cs_firewall_bouncer
+log_level: info
+api_url: ${API_URL}
+api_key: ${API_KEY}
+disable_ipv6: true
+deny_action: DROP
+deny_log: false
+supported_decisions_types:
+  - ban
+#to change log prefix
+#deny_log_prefix: "crowdsec: "
+#to change the blacklists name
+blacklists_ipv4: crowdsec-blacklists
+#blacklists_ipv6: crowdsec6-blacklists
+#if present, insert rule in those chains
+iptables_chains:
+  - INPUT
+#  - FORWARD
+  - DOCKER-USER

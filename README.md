@@ -7,6 +7,7 @@ The project is structured this way:
 
 - `bitwarden` -> Bitwarden password manager
 - `caddy` -> Reverse proxy and HTTPS server
+- `crowdsec` -> CrowdSec Intrusion prevention
 - `ddns` -> Dynamic DNS manager
 - `notify` -> Server used to send notifications from other containers
 - `portainer` -> Portainer container manager
