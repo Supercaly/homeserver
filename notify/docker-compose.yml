@@ -1,9 +1,11 @@
 version: "3"
 services:
-  notify:
+  server:
     build: .
     container_name: notify
     restart: always
+    volumes:
+      - /var/log/notify:/var/log/notify
     networks:
       - notification
 
