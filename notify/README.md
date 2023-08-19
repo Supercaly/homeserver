@@ -36,4 +36,4 @@ Read the official [documentation](https://github.com/caronc/apprise/wiki/config)
 
 This stack uses this docker networks:
 
-- `notification` (external)
+- `notify_default` (internal)

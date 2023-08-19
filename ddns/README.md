@@ -6,6 +6,12 @@ This stack updates automatically the Dynamic DNS (DDNS) using [ddns-updater](htt
 
 The software checks every **5 minutes** if the DNS record for the configured domain names resolves to the current IP address and update the record accordingly.
 
+## Docker Networks
+
+This stack uses this docker networks:
+
+- `ddns_default` (internal)
+
 ## Ports
 
 This stack exposes tis ports to the outside:

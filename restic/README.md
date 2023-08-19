@@ -27,7 +27,7 @@ This stack uses this docker volumes:
 
 This stack uses this docker networks:
 
-- `notification` (external)
+- `notify_default` (external)
 
 ## .env
 

@@ -8,6 +8,12 @@ This stack uses this docker volumes:
 
 - `data` store portainer data
 
+## Docker Networks
+
+This stack uses this docker networks:
+
+- `portainer_default` (internal)
+
 # Ports
 
 This stack exposes this ports to the outside:

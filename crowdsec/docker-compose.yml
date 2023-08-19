@@ -20,7 +20,7 @@ services:
       - ./agent/notifications/notify.yaml:/etc/crowdsec/notifications/notify.yaml
       - /var/log:/var/log/:ro
     networks:
-      - notification
+      - notify_default
 
   firewall-bouncer:
     build: 
@@ -42,7 +42,7 @@ services:
     network_mode: "host"
 
 networks:
-  notification:
+  notify_default:
     external: true
 
 volumes:

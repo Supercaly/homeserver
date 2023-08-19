@@ -30,7 +30,7 @@ This stack uses this docker volumes:
 
 This stack uses this docker networks:
 
-- `caddy` (external)
+- `caddy_default` (internal)
 
 ## Ports
 

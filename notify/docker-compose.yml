@@ -7,8 +7,7 @@ services:
     volumes:
       - /var/log/notify:/var/log/notify
     networks:
-      - notification
+      - default
 
 networks:
-  notification:
-    external: true
+  default:

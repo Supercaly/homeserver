@@ -25,7 +25,7 @@ This image uses this docker volumes:
 
 This image uses this docker networks:
 
-- `notification` (external)
+- `notify_default` (external)
 
 ### Ports
 

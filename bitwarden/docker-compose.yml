@@ -14,13 +14,13 @@ services:
       LOG_LEVEL: "warn"
       TZ: "Europe/Rome"
     networks:
-      - caddy
+      - caddy_default
     volumes:
       - vaultwarden_data:/data
       - /var/log/vaultwarden:/log
 
 networks:
-  caddy:
+  caddy_default:
     external: true
 
 volumes:

@@ -21,7 +21,7 @@ services:
       TZ: "Europe/Rome"
       NOTIFICATION_ADDRESS: "notify:5000"
     networks:
-      - notification
+      - notify_default
     volumes:
       - ./rclone:/root/.config/rclone
       - data:/data
@@ -33,5 +33,5 @@ volumes:
     external: true
 
 networks:
-  notification:
+  notify_default:
     external: true

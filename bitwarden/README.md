@@ -19,4 +19,4 @@ This stack uses the following docker volumes:
 
 This stack uses this docker networks:
 
-- `caddy` (external)
+- `caddy_default` (external)

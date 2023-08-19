@@ -17,6 +17,12 @@ This stack uses this docker volumes:
 
 - `config` store WG configurations
 
+## Docker Networks
+
+This stack uses this docker networks:
+
+- `vpn_default` (internal)
+
 # Ports
 
 This stack exposes this ports to the outside:
