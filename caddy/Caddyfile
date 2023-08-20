@@ -1,17 +1,8 @@
 # Caddyfile used to configure the caddy HTTPS server and reverse proxy.
 
-# Block access to bitwarden admin from outside the local LAN.
-(block_bitwarden_admin_from_wan) {
-  @bw_admin_matcher {
-    path /pwd/admin*
-    not remote_ip private_ranges
-  }
-  handle @bw_admin_matcher {
-    respond "Access denied form outside LAN!" 403 {
-      close
-    }
-  }
-}
+####################
+# Sites Definition
+####################
 
 # Block configuring all the sites accessible through the FQDN DOMAIN_NAME
 # on port HTTPS.
@@ -27,19 +18,54 @@
   tls {$EMAIL}
   encode gzip
 
-  route {
-    # Bitwarden routes
-    import block_bitwarden_admin_from_wan
+  # Bitwarden route
+  route /pwd/* {
+    @bw_admin_matcher {
+      path /pwd/admin*
+      not remote_ip private_ranges
+    }
+    error @bw_admin_matcher 403
+
     reverse_proxy /pwd/notifications/hub vaultwarden:3012
     reverse_proxy /pwd/* vaultwarden:80 {
       header_up X-Real-IP {remote_host}
     }
+  }
 
-    # TODO: Add other routes like portainer and ddns-updater
+  # DDNS-Updater route
+  handle_path /ddns* {
+    @ban_ddns not remote_ip private_ranges
+    error @ban_ddns 403
+    reverse_proxy ddns-updater:8000
+  }
 
-    # Block all other routes
-    handle /* {
-      respond "Access denied" 403 {
+  # Portainer route
+  handle_path /portainer* {
+    @ban_portainer not remote_ip private_ranges
+    error @ban_portainer 403
+    reverse_proxy portainer:9000
+  }
+
+  # Block all other routes
+  error /* 404
+
+  # Handle HTTP errors
+  handle_errors {
+    @403 expression `{err.status_code} == 403`
+    handle @403 {
+      respond "403 - Access denied" 403 {
+        close
+      }
+    }
+
+    @404 expression `{err.status_code} == 404`
+    handle @404 {
+      respond "404 - Not found" 404 {
+        close
+      }
+    }
+    handle {
+      respond "{err.status_code} - {err.status_text}" {err.status_code} {
         close
       }
     }

@@ -3,10 +3,14 @@ services:
   ddns-updater:
     image: qmcgaw/ddns-updater
     container_name: ddns-updater
-    ports:
-      - 8000:8000/tcp
     volumes:
       - ./data:/updater/data
     environment:
       TZ: "Europe/Rome"
     restart: always
+    networks:
+      - caddy_default
+
+networks:
+  caddy_default:
+    external: true
