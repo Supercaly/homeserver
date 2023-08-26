@@ -1,0 +1,22 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/en/configs/widgets
+
+- resources:
+    label: System
+    cpu: true
+    memory: true
+
+- resources:
+    label: Storage
+    disk: /
+
+- search:
+    provider: google
+    focus: true
+    target: _blank
+
+- datetime:
+    text_size: xl
+    format:
+      timeStyle: short

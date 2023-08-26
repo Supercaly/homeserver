@@ -9,6 +9,7 @@ The project is structured this way:
 - `caddy` -> Reverse proxy and HTTPS server
 - `crowdsec` -> CrowdSec Intrusion prevention
 - `ddns` -> Dynamic DNS manager
+- `homepage` -> Dashboard
 - `notify` -> Server used to send notifications from other containers
 - `portainer` -> Portainer container manager
 - `restic` -> Automatic incremental backup

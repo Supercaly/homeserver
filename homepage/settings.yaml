@@ -1,0 +1,23 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/en/configs/settings
+
+title: "Homeserver Dashboard"
+showStats: true
+
+# This is important for reverse proxy to work
+# it changes nextjs absolute path /_next/static to /homepage/_next/static
+# base: /homepage/
+
+layout:
+  Password Manager:
+  Reverse Proxy:
+  Security:
+  Backup:
+  Other:
+    style: row
+    columns: 2
+
+# providers:
+#   openweathermap: openweathermapapikey
+  # weatherapi: weatherapiapikey

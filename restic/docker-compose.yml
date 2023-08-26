@@ -26,6 +26,14 @@ services:
       - ./rclone:/root/.config/rclone
       - data:/data
       - vaultwarden_data:/mnt/vw_data:ro
+    labels:
+      - homepage.group=Backup
+      - homepage.name=Restic
+      - homepage.description=Restic automatic backup service.
+      - homepage.icon=urbackup.png
+      - homepage.server=local-docker
+      - homepage.container=restic-backup
+
 
 volumes:
   data:

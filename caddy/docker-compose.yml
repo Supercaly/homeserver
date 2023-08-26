@@ -18,6 +18,16 @@ services:
       - .env
     environment:
       TZ: "Europe/Rome"
+    labels:
+      - homepage.group=Reverse Proxy
+      - homepage.name=Caddy
+      - homepage.description=Caddy reverse proxy.
+      - homepage.icon=caddy.png
+      - homepage.href=https://calisti.ddnsfree.com/
+      - homepage.server=local-docker
+      - homepage.container=caddy
+      - homepage.widget.type=caddy
+      - homepage.widget.url=http://caddy:2019
 
 networks:
   default:

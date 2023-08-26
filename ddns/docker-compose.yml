@@ -10,6 +10,14 @@ services:
     restart: always
     networks:
       - caddy_default
+    labels:
+      - homepage.group=Other
+      - homepage.name=DDNS Updater
+      - homepage.description=DDNS-Updater WebUI.
+      - homepage.icon=ddns-updater.png
+      - homepage.href=https://calisti.ddnsfree.com/ddns
+      - homepage.server=local-docker
+      - homepage.container=ddns-updater
 
 networks:
   caddy_default:

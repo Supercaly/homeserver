@@ -19,6 +19,14 @@ services:
     ports:
       - 51820:51820/udp
     restart: unless-stopped
+    labels:
+      - homepage.group=Other
+      - homepage.name=VPN
+      - homepage.description=Wireguard VPN server.
+      - homepage.icon=wireguard.png
+      - homepage.server=local-docker
+      - homepage.container=vpn
+
 
 volumes:
   config:

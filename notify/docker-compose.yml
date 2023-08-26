@@ -8,6 +8,13 @@ services:
       - /var/log/notify:/var/log/notify
     networks:
       - default
+    labels:
+      - homepage.group=Other
+      - homepage.name=Notify
+      - homepage.description=Notification server.
+      - homepage.icon=apprise.png
+      - homepage.server=local-docker
+      - homepage.container=notify
 
 networks:
   default:

@@ -1,0 +1,22 @@
+version: "3"
+services:
+  homepage:
+    image: ghcr.io/benphelps/homepage:latest
+    container_name: homepage
+    ports:
+      - 3000:3000 # TODO: Use caddy
+    volumes:
+      - ./docker.yaml:/app/config/docker.yaml
+      - ./settings.yaml:/app/config/settings.yaml
+      - ./services.yaml:/app/config/services.yaml
+      - ./widgets.yaml:/app/config/widgets.yaml
+      - ./bookmarks.yaml:/app/config/bookmarks.yaml
+      - /var/log/homepage/:/app/config/logs
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - caddy_default
+    restart: unless-stopped
+  
+networks:
+  caddy_default:
+    external: true

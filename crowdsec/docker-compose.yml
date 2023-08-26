@@ -21,6 +21,13 @@ services:
       - /var/log:/var/log/:ro
     networks:
       - notify_default
+    labels:
+      - homepage.group=Security
+      - homepage.name=CS Agent
+      - homepage.description=CrowdSec Agent & LAPI.
+      - homepage.icon=crowdsec.png
+      - homepage.server=local-docker
+      - homepage.container=cs_agent
 
   firewall-bouncer:
     build: 
@@ -40,6 +47,13 @@ services:
       - NET_ADMIN
       - NET_RAW
     network_mode: "host"
+    labels:
+      - homepage.group=Security
+      - homepage.name=CS Firewall Bouncer
+      - homepage.description=CrowdSec Firewall Bouncer.
+      - homepage.icon=crowdsec.png
+      - homepage.server=local-docker
+      - homepage.container=cs_firewall_bouncer
 
 networks:
   notify_default:

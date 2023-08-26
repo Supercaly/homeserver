@@ -1,0 +1,14 @@
+---
+
+- Password Manager:
+    - Bitwarden:
+        href: https://calisti.ddnsfree.com/pwd/
+        description: Bitwarden password manager.
+        icon: bitwarden.png
+        servier: local-docker
+        container: vaultwarden
+    - Admin:
+        href: https://calisti.ddnsfree.com/pwd/admin
+        description: Admin page for Bitwarden.
+        icon: bitwarden.png
+        

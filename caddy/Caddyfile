@@ -1,5 +1,13 @@
 # Caddyfile used to configure the caddy HTTPS server and reverse proxy.
 
+################
+# Globa Config
+################
+
+{
+  admin :2019
+}
+
 ####################
 # Sites Definition
 ####################
@@ -15,8 +23,12 @@
     }
   }
 
+  # TLS configuration
   tls {$EMAIL}
   encode gzip
+
+  # Expose metrics endpoint
+  metrics /metrics
 
   # Bitwarden route
   route /pwd/* {
